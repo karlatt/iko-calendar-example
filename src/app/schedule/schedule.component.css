@@ -1,0 +1,28 @@
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+  .rowfl
+  {
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .box .rowfl {
+    border: 1px dotted grey;
+  }
+  
+  .box .rowfl.header {
+    flex: 0 1 auto;
+    justify-content: center;
+  }
+  
+  .box .rowfl.content {
+    flex: 1 1 auto;
+  }
+  
+  .box .rowfl.footer {
+    flex: 0 1 60px;
+   justify-content: center;
+  }
+  

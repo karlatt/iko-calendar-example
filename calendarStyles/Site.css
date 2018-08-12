@@ -1,0 +1,88 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.appbook-column {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.appbook-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    margin: 0 5px;
+    padding: 4px;
+    font-size: 0.8em;
+}
+
+@keyframes blink {
+    50% {
+        border-color: #ff0000;
+    }
+}
+
+.appbook-item-active {
+    -webkit-animation-name: blink;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -moz-animation-name: blink;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    -webkit-box-shadow: 5px 5px 5px;
+    -moz-box-shadow: 5px 5px 5px;
+    box-shadow: 5px 5px 5px;
+
+    left: -5px;
+    top: -5px;
+    transform: translate(-5px, -5px);
+
+    -webkit-transition: box-shadow 0.25s, left  0.25s, top 0.25s;
+    -moz-transition: box-shadow 0.25s, left  0.25s, top 0.25s;
+    transition: box-shadow 0.25s, left  0.25s, top 0.25s;
+
+    z-index: 1;
+}
+
+
+template {
+    display: none;
+}

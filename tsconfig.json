@@ -2,6 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "bridge":["bridgeScripts/bridge"],
+      "gridControls":["bridgeScripts/gridControls"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,8 +15,12 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "customTypes",
+      "node_modules/@types",
     ],
+    "types": [
+      "jquery","node"
+  ],
     "lib": [
       "es2017",
       "dom"

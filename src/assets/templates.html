@@ -1,0 +1,55 @@
+<template id="hours-header">
+    <div>
+        <span>$hour$</span>
+    </div>
+  </template>
+  
+  <template id="employee-header">
+    <div>
+        <span class="employee-header-text">$name$</span>
+    </div>
+  </template>
+  
+  <template id="resource-header">
+    <div>
+        <span class="resource-header-text">$name$</span>
+    </div>
+  </template>
+
+  <template id="appointment-template">
+    <div style="background-color: rgb(1, 1, 1)">
+        <div style="background-color: rgb(0, 0, 0); cursor: pointer" class="appointment-item-service">
+        </div>
+        <div class="appointment-item-text">
+            <div class="appointment-item-pictos">
+                <span class="glyphicon glyphicon-ok-circle hide-picto-1" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-globe hide-picto-2" aria-hidden="true"></span>
+            </div>
+            <span style="font-weight: bold">$client$</span><br />
+            <span>$service$</span><br />
+        </div>
+    </div>
+    <div class="appointment-item-move-anchor scheduler-move-item">
+        <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+    </div>
+    <div class="appointment-item-resize-anchor appointment-item-resize-anchor-bottom scheduler-resize-item">
+        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+    </div>
+    <div class="appointment-item-resize-anchor appointment-item-resize-anchor-right scheduler-resize-item">
+        <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+    </div>
+  </template>
+
+  <template id="vertical-grid-lines">
+    <div class="quarter-hour">
+    </div>
+    <div class="half-hour">
+    </div>
+  </template>
+  
+  <template id="horizontal-grid-lines">
+    <div class="quarter-hour">
+    </div>
+    <div class="half-hour">
+    </div>
+  </template>

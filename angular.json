@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "iko",
       "schematics": {},
       "architect": {
         "build": {
@@ -23,9 +23,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "calendarStyles/perfect-scrollbar.min.css",
+              "calendarStyles/site.css",
+              "calendarStyles/ikosoftScheduleControl.css"
             ],
-            "scripts": []
+            "scripts": [
+
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "bridgeScripts/respond.js",
+              "bridgeScripts/bridge.js",
+              "bridgeScripts/bridge.collections.js",       
+              "bridgeScripts/gridControls.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,285 @@
+﻿/*
+  LESS : http://lesscss.org/features/#features-overview-feature
+*/
+.testtouch {
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+}
+template {
+  display: none;
+}
+.grid-theme {
+  -webkit-touch-callout: none;
+  border: 3px solid black;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.grid-theme .scheduler-layout-normal .active .appointment-item-resize-anchor-bottom {
+  display: block;
+  z-index: 2;
+}
+.grid-theme .scheduler-layout-inverted .active .appointment-item-resize-anchor-right {
+  display: block;
+  z-index: 2;
+}
+.grid-theme .grid-viewport {
+  -webkit-overflow-scrolling: touch;
+}
+.grid-theme .appointments-layer .grid-item {
+  padding: 0 5px;
+}
+.grid-theme .appointments-layer .grid-item > div:first-child {
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+}
+.grid-theme .appointment-item {
+  pointer-events: none;
+}
+.grid-theme .appointment-item .appointment-item-resize-anchor {
+  position: absolute;
+  display: none;
+  color: red;
+}
+.grid-theme .appointment-item .appointment-item-resize-anchor-right {
+  top: 50%;
+  left: 100%;
+  -moz-transform: translate(-100%, -50%);
+  -ms-transform: translate(-100%, -50%);
+  -o-transform: translate(-100%, -50%);
+  -webkit-transform: translate(-100%, -50%);
+  transform: translate(-100%, -50%);
+  padding-right: 10px;
+}
+.grid-theme .appointment-item .appointment-item-resize-anchor-bottom {
+  left: 50%;
+  top: 100%;
+  -moz-transform: translate(-50%, -100%);
+  -ms-transform: translate(-50%, -100%);
+  -o-transform: translate(-50%, -100%);
+  -webkit-transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%);
+}
+.grid-theme .appointment-item .appointment-item-move-anchor {
+  opacity: 0;
+  top: 1px;
+  right: 10px;
+  display: none;
+  background-color: white;
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+  border-bottom: 2px solid red;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  position: absolute;
+  padding: 4px 10px 0 10px;
+  z-index: 2;
+  /*
+            -moz-transform: translate(-50%, 0);
+            -ms-transform: translate(-50%, 0);
+            -o-transform: translate(-50%, 0);
+            -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);*/
+}
+.grid-theme .appointment-item.active .appointment-item-move-anchor {
+  display: block;
+  opacity: 1;
+  -moz-transition: opacity linear 0.3s;
+  -o-transition: opacity linear 0.3s;
+  -webkit-transition: opacity linear 0.3s;
+  transition: opacity linear 0.3s;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+.grid-theme .appointment-item > div:first-child {
+  overflow: hidden;
+  border: 1px solid gray;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: black;
+  padding: 5px;
+}
+.grid-theme .appointment-item > div:first-child > .appointment-item-service {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.grid-theme .appointment-item > div:first-child > .appointment-item-text {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+  pointer-events: none;
+}
+.grid-theme .appointment-item > div:first-child > .appointment-item-text > .appointment-item-pictos {
+  float: right;
+  font-size: 0.8em;
+  width: 15px;
+}
+.grid-theme .appointment-item > div:first-child > .appointment-item-text > .appointment-item-pictos .hide-picto-1 {
+  display: none;
+}
+.grid-theme .appointment-item > div:first-child > .appointment-item-text > .appointment-item-pictos .hide-picto-2 {
+  display: none;
+}
+.grid-theme .appointment-item.selected > div:first-child {
+  border: 1px solid red;
+  box-shadow: rgba(0, 0, 0, 0.4) 5px 5px 5px;
+  -moz-transition: all linear 0.1s;
+  -o-transition: all linear 0.1s;
+  -webkit-transition: all linear 0.1s;
+  transition: all linear 0.1s;
+  z-index: 1;
+}
+.grid-theme .loading {
+  background-image: url('/Content/ajax-loader-grey.gif');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.grid-theme .scheduler-empty-area span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.grid-theme .worktime-item {
+  background-color: white;
+}
+.grid-theme .employee-header-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 5px;
+  white-space: pre-wrap;
+}
+.grid-theme .resource-header-text {
+  font-size: 1.2em;
+  font-style: italic;
+  padding: 5px;
+  white-space: pre-wrap;
+}
+.grid-theme .horizontal-hours .grid-item {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+.grid-theme .horizontal-hours .grid-item .quarter-hour {
+  width: 100%;
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  border-top: 1px dashed gray;
+  border-bottom: 1px dashed gray;
+}
+.grid-theme .horizontal-hours .grid-item .half-hour {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 50%;
+  border-bottom: 1px solid gray;
+}
+.grid-theme .vertical-hours .grid-item {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+.grid-theme .vertical-hours .grid-item .quarter-hour {
+  height: 100%;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  border-left: 1px dashed gray;
+  border-right: 1px dashed gray;
+}
+.grid-theme .vertical-hours .grid-item .half-hour {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 50%;
+  border-right: 1px solid gray;
+}
+.grid-theme .vertical-grid-lines-layer .grid-item {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+.grid-theme .scheduler-empty-area {
+  background-color: white;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+.grid-theme .scheduler-columnbeaders-area {
+  background-color: white;
+}
+.grid-theme .scheduler-columnbeaders-area .grid-viewport {
+  border-bottom: 2px solid black;
+}
+.grid-theme .scheduler-columnbeaders-area .grid-item > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.grid-theme .scheduler-columnbeaders-area .grid-item > div > span {
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+.grid-theme .scheduler-columnbeaders-area .grid-item {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+.grid-theme .scheduler-rowheaders-area .grid-viewport {
+  border-right: 2px solid black;
+}
+.grid-theme .scheduler-rowheaders-area .grid-item {
+  background-color: white;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+.grid-theme .scheduler-rowheaders-area .grid-item span {
+  padding: 1px 5px 0 0;
+  font-weight: bold;
+  font-size: 1.2em;
+  float: right;
+}
+.grid-theme .scheduler-rowheaders-area-fixed .grid-item {
+  background-color: lightgray;
+}
+.grid-theme .scheduler-columnbeaders-area-fixed .grid-item {
+  background-color: lightgray;
+}
+.grid-theme .current-time-line {
+  background-color: rgba(255, 0, 0, 0.4);
+  z-index: 1;
+  pointer-events: none;
+}
+.grid-theme > .scheduler-composite-layout > .grid-viewport > .grid-layers-container {
+  background-color: dimgray;
+}
+.grid-theme .scheduler-layout-normal .scheduler-columnbeaders-area .has-margin-end,
+.grid-theme .scheduler-layout-normal .vertical-grid-lines-layer .has-margin-end {
+  box-shadow: black 5px 0 0px 0px;
+}
+.grid-theme .scheduler-layout-inverted .scheduler-rowheaders-area .has-margin-end,
+.grid-theme .scheduler-layout-inverted .horizontal-grid-lines-layer .has-margin-end {
+  box-shadow: black 0 5px 0px 0px;
+}

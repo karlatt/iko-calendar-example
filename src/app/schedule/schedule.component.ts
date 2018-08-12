@@ -12,7 +12,12 @@ import PerfectScrollbar from 'perfect-scrollbar';
   // tslint:disable:comment-format
 
 const BASE_DATA_URI = 'http://localhost:55447/'; //paske sinon c'est la misère à trouver hein !
+//petite note : pour aller vite , les manips de DOM sont faites avec JQuery et la délcaration des events aussi (parce qu'en fait j'ai triché et que j'ai piqué plein de
+// code au js de Patrick ...).Mais tout peut se faire aussi bien et vite à la manière Angular...
+//Pareil , j'ai pas encadré certaines manips de DOM avec zone.RunOutsideAngular , mais ça faut faire au cas par cas et pas n'importe quoi
 
+//pour bien faire aussi , j'aurais dû renvoyer les events et callbacks avec des EventEmitter et des Observables , mais bon , j'ai vraiment fait ça
+// à la va-vite , c'est qu'un tout ptit début de rien du tout.....donc, soyez indulgents quand c'est un peu tout pourri :)
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'iko-schedule',

@@ -7,10 +7,6 @@ import { PagePluBelleComponent } from './pageplubelle';
 import { ZoulikPageComponent } from './zoulipage';
 import { AlorAlorComponent } from './aloralor';
 
-/*import { CanDeactivateGuard }       from './can-deactivate-guard.service';
-import { AuthGuard }                from './auth-guard.service';
-import { SelectivePreloadingStrategy } from './selective-preloading-strategy';*/
-
 const zeRoutes: Routes = [
   {
     path: 'compose',
@@ -19,14 +15,8 @@ const zeRoutes: Routes = [
   },
   {
     path: 'schedule',
-    loadChildren: './schedule/schedule.module#ScheduleModule',
-    // canLoad: [AuthGuard]
+    loadChildren: './schedule/schedule.module#ScheduleModule'
   },
- /* {
-    path: 'crisis-center',
-    loadChildren: 'app/crisis-center/crisis-center.module#CrisisCenterModule',
-    data: { preload: true }
-  },*/
   { path: 'supezouli', component: ZoulikPageComponent },
   { path: 'pageplubelle', component: PagePluBelleComponent },
   { path: 'aloralor', component: AlorAlorComponent },
@@ -40,8 +30,7 @@ const zeRoutes: Routes = [
     RouterModule.forRoot(
       zeRoutes,
       {
-        enableTracing: true, // Attention , que pour le debug
-        //  preloadingStrategy: SelectivePreloadingStrategy,
+        enableTracing: true// Attention , que pour le debug
 
       }
     )

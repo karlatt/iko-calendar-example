@@ -1,10 +1,9 @@
 <nav>
-  <a routerLink="/supezouli" routerLinkActive="active">Une super jolie page</a>
-  <a routerLink="/schedule" routerLinkActive="active">Le bô calendrier de Patrick</a>
-      <a routerLink="/pageplubelle" routerLinkActive="active">Une page encore plus belle</a>
-      <a routerLink="/aloralor" routerLinkActive="active">Alors là , carrément .....</a>
-      <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+    <a routerLink="/supezouli" routerLinkActive="active">Une super jolie page</a>
+    <a routerLink="/schedule" routerLinkActive="active">Le bô calendrier de Patrick</a>
+    <a routerLink="/pageplubelle" routerLinkActive="active">Une page encore plus belle</a>
+    <a routerLink="/aloralor" routerLinkActive="active">Alors là , carrément .....</a>
+    <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
 </nav>
-    <router-outlet></router-outlet>
-    <router-outlet name="popup"></router-outlet>
-
+<router-outlet></router-outlet>
+<router-outlet name="popup"></router-outlet>

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { PagePluBelleComponent } from './pageplubelle';
 import { ZoulikPageComponent } from './zoulipage';
 import { AlorAlorComponent } from './aloralor';
+import { UrlService } from './services/url.service';
 
 @NgModule({
   declarations: [

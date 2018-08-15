@@ -1,16 +1,16 @@
-<h3>Contact Ikosoft</h3>
+<h3>Super Modale de Contact</h3>
 <div *ngIf="details">
   {{ details }}
 </div>
 <div>
   <div>
-    <label>Message: </label>
+    <label>Message:(psst , et regarde bien l'url hein !) </label>
   </div>
   <div>
     <textarea [(ngModel)]="message" rows="10" cols="35" [disabled]="sending"></textarea>
   </div>
 </div>
 <p *ngIf="!sending">
-  <button (click)="send()">Send</button>
-  <button (click)="cancel()">Cancel</button>
+  <button class="btn btn-info" (click)="send()">Send</button>
+  <button class="btn btn-primary" (click)="cancel()">Cancel</button>
 </p>

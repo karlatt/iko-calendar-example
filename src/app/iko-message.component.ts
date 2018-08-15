@@ -1,13 +1,13 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { slideInDownAnimation } from './animations';
+import { zeZgaineFlyPopAnimation } from './animations';
 // tslint:disable:import-spacing
 
-
+// j'ai piqué cet exemple quelque part dans la doc Angular , comme quoi des fois hein ...
 @Component({
   templateUrl: './iko-message.component.html',
-  styles: [':host { position: relative; bottom: 10%; }'],
-  animations: [slideInDownAnimation]
+  styles: [':host { position: relative; bottom: 10%; }  .btn{margin:5px;}'],
+  animations: [zeZgaineFlyPopAnimation]
 })
 export class IkoMessageComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class IkoMessageComponent implements OnInit {
   }
   send() {
     this.sending = true;
-    this.details = `En fait c'est pour du faux...`;
+    this.details = `En fait c'est pour du faux , j'envoie rien du tout `;
 
 
     setTimeout(() => {

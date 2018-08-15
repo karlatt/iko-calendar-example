@@ -1,34 +1,38 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import * as $ from 'jquery'; // on peut tout faire sans ici ,mais c'est plus facile pour tricher :)
+import { Component, AfterViewInit, OnInit, Output, EventEmitter} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import * as $ from 'jquery'; // on peut tout faire sans jquery ici ,mais c'est plus facile pour tricher :)
 import * as GridControls from 'gridControls';
 import * as Bridge from 'bridge';
-import { HttpClient } from '@angular/common/http';
-import { LoadItemsUrlBuilderEventArgs } from 'gridControls';
 import PerfectScrollbar from 'perfect-scrollbar';
+
+import { UrlService } from '../services';
+
 
 
 
 // tslint:disable:max-line-length
 // tslint:disable:comment-format
-
-const BASE_DATA_URI = 'http://localhost:55447/'; //paske sinon c'est la misère à trouver hein !
-
 //petite note : pour aller vite , les manips de DOM sont faites avec JQuery et la déclaration des events aussi (parce qu'en fait j'ai triché et que j'ai piqué plein de
-// code au js de Patrick ...).Mais tout peut se faire aussi bien et vite à la manière Angular...
+// code au js de Patrick , après avoir , évidemment corrigé les milliers d'erreurs xD ...).Mais tout peut se faire aussi bien et vite à la manière Angular...
 //Pareil , j'ai pas encadré certaines manips de DOM avec zone.RunOutsideAngular , mais ça faut faire au cas par cas et pas n'importe quoi
 
 //pour bien faire aussi , j'aurais dû renvoyer les events et callbacks avec des EventEmitter et des Observables , mais bon , j'ai vraiment fait ça
-// à la va-vite , c'est qu'un tout ptit début de rien du tout.....donc, soyez indulgents quand c'est un peu tout pourri :)
+// à la va-vite (mais j'ai quand même mis un exemple , nanère..) , c'est qu'un tout ptit début de rien du tout.....donc, soyez indulgents vu que c'est un peu tout pourri :)
+//Tout doux : d'ailleurs , la prochaine et première étape logique serait de faire une directive pour remplacer l'id mScheduler dans le Html , et pourquoi pas lui passer des options comme le nb de jours affichés tout ça tout ça
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'iko-schedule',
     templateUrl: './schedule.component.html',
+    providers: [UrlService],
     styleUrls: ['./schedule.component.css']
 })
 
 export class ScheduleComponent implements AfterViewInit, OnInit {
 
     templatesContent: string;
+    //juste pour l'exemple, ce qu'il faut faire sur les callbacks du contrôle :
+    @Output() schedulerItemClick = new EventEmitter<GridControls.SchedulerMouseEventArgs>(true); // async , pour sortir de la boucle de l'event originel
 
     ngOnInit(): void {
 
@@ -54,14 +58,14 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
 
     }
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient, private _urls: UrlService) { }
 
     ngAfterViewInit(): void {
         if ($('#mScheduler').length > 0) {
 
             this.setCustomScollQuickAndDirty();
-
-            this._http.get('assets/templates.html', { responseType: 'text' }).subscribe(data => {
+            //comme ça si on veut on met les templates sur un serveur externe ou autre (si on voulait vraiment être Angularesques cet appel viendrait d'un service , mais bon...)
+            this._http.get(this._urls.TemplatesUrl, { responseType: 'text' }).subscribe(data => {
                 this.templatesContent = data;
                 this.prepareSchedulerForDisplay();
             });
@@ -75,7 +79,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
 
     private setCustomScollQuickAndDirty() {
 
-        //TODO  l' a fallu refaire ces méthodes avec le package perfect-scrollbar , la version jquery est chelou avec Angular (pas le temps de mieux, j'ai que quelques heures :)  )
+        //TOut DOux :   l' a fallu refaire ces méthodes avec le package perfect-scrollbar , la version jquery est chelou avec Angular (pas le temps de mieux, j'ai que quelques heures :)  )
         //faut revoir ça bien , des fois c'est bizaouarifique ....
         //-------------------------
         //  Scroll personnalisé, sauf pour les téléphones/tablettes (tests faits par Bridge.net, basés sur l'useragent du navigateur)
@@ -117,11 +121,9 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         //------------------------
         //  Source de données pour le ou les calendriers
         //------------------------
-        const dataSourceOptions = this.createDataSourceOptions('Data/LoadCalendars', e => {
+        const dataSourceOptions = this.createDataSourceOptions(this._urls.CalendarUrl, e => {
             //  on fait simple : on passe l'objet en argument et on récupérera la même classe côté serveur
-            let uri = BASE_DATA_URI + '/Data/LoadAppointments?';
-            uri += 'json=' + encodeURIComponent(JSON.stringify(e));
-            return uri;
+            return this._urls.AppointmentsUrl + encodeURIComponent(JSON.stringify(e));
         }, objectsArray => {
             for (let i = 0; i < objectsArray.length; i++) {
                 const tmpFacile = (<any>objectsArray[i]);
@@ -138,7 +140,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         const options = this.createSchedulerOptions('ps-scrollbar-x-rail ps-scrollbar-y-rail', 8, 19, 3, 5);
         //--------------------------
         //  templating
-        this.generateTemplates(options);
+        this.fillTemplates(options);
         //------------------------------------
         //callbacks
         this.setOptionsCallbacks(
@@ -163,6 +165,9 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
                         return;
                     }
                 }
+
+                //on émet l'event Angular , qui devient écoutable depuis le composant parent
+                this.schedulerItemClick.next(mouseEventArgs); //...et voilou
             },
             mouseEventArgs => {
                 //  est-ce qu'on a double-cliqué sur un RDV ?
@@ -315,7 +320,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         options.callbacks.onClick = onItemClick;
     }
 
-    private generateTemplates(options: GridControls.SchedulerOptions, templateHtml?: JQuery<HTMLElement>) {
+    private fillTemplates(options: GridControls.SchedulerOptions, templateHtml?: JQuery<HTMLElement>) {
 
         const template = templateHtml || $(this.templatesContent); // si on l'a pas en param , on récupère ce qu'on a lu au début (qui peut provenir d'où on veut hein , c'est un http get)
         //  header des heures
@@ -403,13 +408,13 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         return options;
     }
 
-    private createDataSourceOptions(calRelativeUrl: string,
-        buildItemsUrlFunc: (e: LoadItemsUrlBuilderEventArgs) => string,
+    private createDataSourceOptions(calendarUrl: string,
+        buildItemsUrlFunc: (e: GridControls.LoadItemsUrlBuilderEventArgs) => string,
         onItemsDownloadedFunc?: (objArray: object[]) => object[]
     ) {
         const dataSourceOptions = new GridControls.SchedulerDataSourceOptions();
         //  URL où télécharger les calendriers (employés, ressources, ...)
-        dataSourceOptions.calendarsUrl = BASE_DATA_URI + calRelativeUrl;
+        dataSourceOptions.calendarsUrl = calendarUrl;
 
         // TODO pour la factorisation , passer un objet options en param
 

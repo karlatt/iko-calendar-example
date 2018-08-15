@@ -15,7 +15,7 @@ const zeRoutes: Routes = [
   },
   {
     path: 'schedule',
-    loadChildren: './schedule/schedule.module#ScheduleModule'
+    loadChildren: './schedule/schedule.module#ScheduleModule'// pour que comme ça il est fainéant-chargé
   },
   { path: 'supezouli', component: ZoulikPageComponent },
   { path: 'pageplubelle', component: PagePluBelleComponent },

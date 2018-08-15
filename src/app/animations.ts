@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 // Component transition animations
-export const slideInDownAnimation =
+export const zeZgaineFlyPopAnimation =
   trigger('popAnimation', [
     state('*',
       style({

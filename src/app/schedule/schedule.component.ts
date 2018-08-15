@@ -173,7 +173,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
                     this.schedulerItemClick.next(mouseEventArgs)); //...et voilou
 
             }),
-            mouseEventArgs => {
+            mouseEventArgs => this._zone.runOutsideAngular(() => {
                 //  est-ce qu'on a double-cliqué sur un RDV ?
                 let appointmentObject = null;
                 for (let i = 0; i < mouseEventArgs.items.length; i++) {
@@ -195,7 +195,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
                 }
                 // tslint:disable-next-line:max-line-length
                 alert('create appointment : ' + mouseEventArgs.calendarID + ' ' + mouseEventArgs.hour.toString() + ':' + mouseEventArgs.minute.toString());
-            });
+            }));
 
         //--------------------------
         //   création du contrôle

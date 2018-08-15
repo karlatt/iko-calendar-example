@@ -18,7 +18,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 8) jquery and bootstrap are refrenced as dev dependencies , but loaded at runtime when the app start , so don't move the references in package.json
 
 9 ) ...I don't know
-10) ah oui , don't care about the 'Module not found: Error: Can't resolve 'crypto' in 'D:\VsCodeProjects\Angular\calendar-ex\ikosoft-schedule-example\bridgeScripts' because I was too lazy to link the crypto module as it serve à rien
+
+10) ah oui , don't care about the 'Module not found: Error: Can't resolve 'crypto' in 'D:\VsCodeProjects\Angular\calendar-ex\ikosoft-schedule-example\bridgeScripts' because I was too lazy to link the crypto module as it serves à rien
 
 ## Build
 

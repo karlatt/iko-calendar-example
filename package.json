@@ -2,7 +2,7 @@
   "name": "ikosoft-schedule-example",
   "version": "0.0.0",
   "author": {
-    "name": "Fabrice Monaco Copyright des caraïbes (oui , je sais , mais il esty tard ..."
+    "name": "Fabrice Monaco pyright des caraïbes (oui , je sais , mais il est tard ..."
   },
   "scripts": {
     "ng": "ng",
@@ -38,6 +38,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.3.5",
     "@types/node": "~8.9.4",
+    "bootstrap": "^3.3.7",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

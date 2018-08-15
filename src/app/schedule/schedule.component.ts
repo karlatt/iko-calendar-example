@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, AfterViewInit, OnInit, Output, EventEmitter, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import * as $ from 'jquery'; // on peut tout faire sans jquery ici ,mais c'est plus facile pour tricher :)
@@ -58,7 +58,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
 
     }
 
-    constructor(private _http: HttpClient, private _urls: UrlService) { }
+    constructor(private _http: HttpClient, private _urls: UrlService, private _zone: NgZone) { }
 
     ngAfterViewInit(): void {
         if ($('#mScheduler').length > 0) {
@@ -87,32 +87,35 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         //  lier le scroll personnalisé à un élément
         //Fab : Quick&Dirty Fix :)
 
-        const myMap = new Map<HTMLElement, PerfectScrollbar>();
-        GridControls.GridOptions.bindCustomScrollbars = e => {
-            if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
-                const pf = new PerfectScrollbar(e);
-                myMap.set(e, pf);
-            }
-        };
-        //  supprimer le scroll personnalisé à un élément
-        GridControls.GridOptions.unbindCustomScrollbars = e => {
-            if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
-                const pf = myMap.get(e);
-                if (pf) {
-                    pf.destroy();
-                    myMap.delete(e);
+        //bon , là faut le mettre sinon , vla les perfs !!
+        this._zone.runOutsideAngular(() => {
+            const myMap = new Map<HTMLElement, PerfectScrollbar>();
+            GridControls.GridOptions.bindCustomScrollbars = e => {
+                if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
+                    const pf = new PerfectScrollbar(e);
+                    myMap.set(e, pf);
                 }
-            }
-        };
-        //  informer le scroll personnalisé d'un changement par code
-        GridControls.GridOptions.updateCustomScrollbars = e => {
-            if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
-                const pf = myMap.get(e);
-                if (pf) {
-                    pf.update();
+            };
+            //  supprimer le scroll personnalisé à un élément
+            GridControls.GridOptions.unbindCustomScrollbars = e => {
+                if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
+                    const pf = myMap.get(e);
+                    if (pf) {
+                        pf.destroy();
+                        myMap.delete(e);
+                    }
                 }
-            }
-        };
+            };
+            //  informer le scroll personnalisé d'un changement par code
+            GridControls.GridOptions.updateCustomScrollbars = e => {
+                if (Bridge.Browser.isTablet === false && Bridge.Browser.isPhone === false) {
+                    const pf = myMap.get(e);
+                    if (pf) {
+                        pf.update();
+                    }
+                }
+            };
+        });
     }
 
     private prepareSchedulerForDisplay() {
@@ -145,7 +148,7 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
         //callbacks
         this.setOptionsCallbacks(
             options,
-            mouseEventArgs => {
+            mouseEventArgs => this._zone.runOutsideAngular(() => {  // voilou , pour bien faire , comment déclarer les events jquqery ou DOM hors Angular , mais j'y ai pas fait partout paske bon
                 //  Dé-sélection
                 $('#mScheduler .active').removeClass('active');
                 $('#mScheduler .selected').removeClass('selected');
@@ -165,10 +168,11 @@ export class ScheduleComponent implements AfterViewInit, OnInit {
                         return;
                     }
                 }
+                this._zone.run(() =>
+                    //on émet l'event Angular , qui devient écoutable depuis le composant parent
+                    this.schedulerItemClick.next(mouseEventArgs)); //...et voilou
 
-                //on émet l'event Angular , qui devient écoutable depuis le composant parent
-                this.schedulerItemClick.next(mouseEventArgs); //...et voilou
-            },
+            }),
             mouseEventArgs => {
                 //  est-ce qu'on a double-cliqué sur un RDV ?
                 let appointmentObject = null;

@@ -15,8 +15,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 5) this won't work with bootstrap 4 , as the glyphicons are no longer included , ah les cons !
 6) the schedule component is lazy loaded , so if you don't use it , it won"t take any space , but if you don't use it , I m'aurai bien fait chier pour rien
 7) Patrick , sorry for including your photography when the fourth button is clicked , but I think it will remind you a beautiful night :)
-8) jquery and bootstrpa are refrenced as dev dependencies , but loaded at runtime when the app start , so don't move the references in package.json
+8) jquery and bootstrap are refrenced as dev dependencies , but loaded at runtime when the app start , so don't move the references in package.json
+
 9 ) ...I don't know
+10) ah oui , don't care about the 'Module not found: Error: Can't resolve 'crypto' in 'D:\VsCodeProjects\Angular\calendar-ex\ikosoft-schedule-example\bridgeScripts' because I was too lazy to link the crypto module as it serve à rien
 
 ## Build
 
